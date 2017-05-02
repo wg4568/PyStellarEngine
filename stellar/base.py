@@ -55,7 +55,6 @@ class Base:
 			self.get_current_room()._logic()
 			self.get_current_room()._draw()
 
-
-
 			pygame.display.update()
 			self.clock.tick(self.target_framerate)
+			self.frame += 1
