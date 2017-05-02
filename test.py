@@ -10,17 +10,17 @@
 
 # engine.stopEngines()
 
-import stellar
+from stellar import objects, sprites, rooms, base
 from stellar.keys import *
 
-game = stellar.base.Base()
+game = base.Base()
 
 
-class Player(stellar.base.Object):
+class Player(objects.Object):
 	def __init__(self):
-		stellar.base.Object.__init__(self)
+		objects.Object.__init__(self)
 
-		spr = stellar.sprites.Box((255, 0, 0), 10, 10)
+		spr = sprites.Box((255, 0, 0), 10, 10)
 		self.add_sprite("box", spr)
 		self.set_sprite("box")
 
@@ -39,7 +39,7 @@ class Player(stellar.base.Object):
 
 obj_player = Player()
 
-rm_main = stellar.base.Room()
+rm_main = rooms.Room()
 rm_main.add_object(obj_player)
 
 game.add_room("rm_main", rm_main)

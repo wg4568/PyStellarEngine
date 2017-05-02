@@ -74,3 +74,8 @@ class Engine:
 
         
     
+e = Engine()
+e.revEngines()
+
+while not e.shouldClose():
+    e.singleStep()
