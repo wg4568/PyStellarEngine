@@ -1,5 +1,4 @@
 import pygame
-import math
 import tools
 
 class Node:
