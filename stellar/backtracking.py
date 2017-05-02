@@ -57,9 +57,37 @@ def buildMaze(grid):
         startN = 0
     else:
         startN = grid.width - 1
+    curTile = grid.nodes[n][m]
+    stack = []
+    pathed = []
+    stack.append(curTile)
+    pathed.append(curTile)
+    while len(stack) != 0:
+        hasUnpathedNeighbor = False
+        for neighbor in curTile.neighbors:
+            if not neighbor in pathed:
+                hasUnpathedNeighbor = True
+        if hasUnpathedNeighbor:
+            nextTile = random.range(len(curTile.neighbors)-1)
+            while nextTile in pathed:
+                nextTile = random.range(len(curTile.neighbors)-1)
+            index = curTile.neighbors.index(nextTile)
+            if index == 0:
+                nextTile.addHole(2)
+                curTile.addHole(0)
+            elif index == 2:
+                curTile.addHole(2)
+                nextTile.addHole(0)
+            elif index == 1:
+                curTile.addHole(1)
+                nextTile.addHole(3)
+            elif index == 3:
+                curTile.addHole(3)
+                nextTile.addHole(3)
+        else:
+            curTile = pathed.pop(len(pathed)-1)
 
-    #wip
-
+            
         
     
 
