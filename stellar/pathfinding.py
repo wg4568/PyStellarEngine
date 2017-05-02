@@ -23,7 +23,7 @@ class Grid:
 def autoBuildNeighborsLists(grid, min_dist=30):
     for node in grid.nodes:
         for potential in grid.nodes:
-            if (potential != node and returnDistanceBetweenPoints(node.x,potential.x,node.y,potential.y) <= min_dist):
+            if (potential != node and tools.returnDistanceBetweenPoints(node.x,potential.x,node.y,potential.y) <= min_dist):
                 node.neighbors.append(potential)
                 node.moveCosts.append(1)
 
@@ -46,7 +46,7 @@ def pathfind(grid, startNode, endNode, nodeSize):
             if not neighbor.blocked:
                 if not neighbor in openList:
                     neighbor.hScore= curNode.hScore + curNode.moveCosts[curNode.neighbors.index(neighbor)]
-                    neighbor.gscore = returnDistanceBetweenPoints(neighbor.x,endNode.x,neighbor.y,endNode.y)/nodeSize
+                    neighbor.gscore = tools.returnDistanceBetweenPoints(neighbor.x,endNode.x,neighbor.y,endNode.y)/nodeSize
                     neighbor.mscore = neighbor.hscore + neighbor.gscore
                     openList.append(neighbor)
                     openListPriorities.append(neighbor.mscore)
