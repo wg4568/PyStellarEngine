@@ -1,5 +1,5 @@
-<<<<<<< HEAD
 import pygame
+import math
 
 class Font(pygame.font.Font):
 	def __init__(self, path, size, color, background=None, antialias=True, underline=False, bold=False, italic=False):
@@ -33,10 +33,6 @@ class Cooldown:
 
 	def is_done(self):
 		return self.clock <= 0
-=======
-import pygame
-import math
 
 def returnDistanceBetweenPoints(x1, x2, y1, y2):
     return math.sqrt((x1-x2)^2 + (y1-y2)^2)
->>>>>>> origin/master
