@@ -1,5 +1,6 @@
 import pygame
 import math
+import tools
 
 class Node:
     def __init__(self):
@@ -18,8 +19,6 @@ class Grid:
     def __init__(self):
         self.nodes=[]
 
-def returnDistanceBetweenPoints(x1, x2, y1, y2):
-    return math.sqrt((x1-x2)^2 + (y1-y2)^2)
     
 def autoBuildNeighborsLists(grid, min_dist=30):
     for node in grid.nodes:
