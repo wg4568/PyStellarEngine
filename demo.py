@@ -10,7 +10,7 @@ class Button(stellar.objects.Object):
 		self.set_sprite("default")
 		self.clicked = None
 
-	def logic(self):			# Toggles between sprites
+	def logic(self):							# Toggles between sprites
 		if self.mouse_over():
 			self.set_sprite("hover")
 		else:
@@ -73,8 +73,8 @@ class Menu(stellar.rooms.Room):
 
 		self.add_object(obj_start)
 
-	def begin_game(self):				# Called by the obj_start Button when it's clicked
-		self.game.set_room("main")		# Switch to 'main' room, essentially starting the game
+	def begin_game(self):						# Called by the obj_start Button when it's clicked
+		self.game.set_room("main")				# Switch to 'main' room, essentially starting the game
 
 
 # The room in which the 'gameplay' takes place, has some help text
