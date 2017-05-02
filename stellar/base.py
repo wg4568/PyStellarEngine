@@ -1,6 +1,15 @@
 import pygame
 
 class Room:
-	def __init__(self):
+	def __init__(self, game):
+		self.game = game
 		self.background = (0, 0, 0)
-		self.
+		self.objects = []
+
+	def draw(self):
+		for obj in self.objects:
+			obj._draw(self.game)
+
+	def logic(self):
+		for obj in self.objects:
+			obj._logic(self.game)
