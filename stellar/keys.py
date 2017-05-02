@@ -30,7 +30,7 @@ def released_check(released,events):
                         released[event.key] = True
         mouse = [False] * 3
         for event in events:
-                if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.type == pygame.MOUSEBUTTONUP:
                         if event.button == 1:
                                 mouse[0] = True
                         if event.button == 3:
