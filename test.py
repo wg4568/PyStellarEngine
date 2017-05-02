@@ -18,13 +18,13 @@ class Player(objects.Object):
 		print self.mouse_over()
 
 	def control(self, buttons, mousepos):
-		if buttons[K_UP]:
+		if buttons[S_HELD,K_UP]:
 			self.y -= 1
-		if buttons[K_DOWN]:
+		if buttons[S_HELD,K_DOWN]:
 			self.y += 1
-		if buttons[K_LEFT]:
+		if buttons[S_HELD,K_LEFT]:
 			self.x -= 1
-		if buttons[K_RIGHT]:
+		if buttons[S_HELD,K_RIGHT]:
 			self.x += 1
 
 obj_player = Player()
