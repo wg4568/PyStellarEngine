@@ -53,6 +53,8 @@ class Menu(stellar.rooms.Room):
 		fix_author = stellar.sprites.Text("A demo by Leap", stellar.tools.Font("arial.ttf", 20, (180, 180, 180), italic=True))
 
 		# Define the two sprites for the button object in a minute
+		# 'Compound' sprites are simply sprites made up of multiple other sprites, in this case,
+		#	a box with a text sprite on top
 		spr_start_default = stellar.sprites.Compound(
 			stellar.sprites.Box((180, 0, 0), 180, 50),
 			stellar.sprites.Text("Start", stellar.tools.Font("arial.ttf", 30, (255, 255, 255)), xoffset=5, yoffset=5)
@@ -85,9 +87,7 @@ class Main(stellar.rooms.Room):
 
 		fnt_help = stellar.tools.Font("arial.ttf", 12, (180, 180, 180), italic=True, bold=True)
 
-		# Another fixture, this time a 'compound' sprite
-		# Compound sprites are simply sprites made up of multiple other sprites, in this case,
-		#	two text sprites, but one offsetted to be below the other
+		# Another fixture, more compound sprites
 		fix_help = stellar.sprites.Compound(
 			stellar.sprites.Text("Press escape to return to menu", fnt_help),
 			stellar.sprites.Text("Arrow keys to move", fnt_help, yoffset=16)
