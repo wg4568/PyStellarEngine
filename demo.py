@@ -42,7 +42,6 @@ class Player(stellar.objects.Object):
 
 
 # Menu room, has some text, and a Button which calls self.begin_game
-# This starts the game (no duh)
 class Menu(stellar.rooms.Room):
 	def __init__(self):
 		stellar.rooms.Room.__init__(self)
@@ -75,7 +74,7 @@ class Menu(stellar.rooms.Room):
 		self.add_object(obj_start)
 
 	def begin_game(self):				# Called by the obj_start Button when it's clicked
-		self.game.set_room("main")
+		self.game.set_room("main")		# Switch to 'main' room, essentially starting the game
 
 
 # The room in which the 'gameplay' takes place, has some help text
@@ -117,5 +116,5 @@ game.add_room("menu", Menu())
 game.add_room("main", Main())
 game.set_room("menu")
 
-# Launch the game
+# Launch the game (no duh)
 game.start()
