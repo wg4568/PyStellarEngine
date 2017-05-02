@@ -11,19 +11,19 @@ class Button(stellar.objects.Object):
         self.set_sprite("default")
         self.clicked = None
 
-        def logic(self):
-            pass
-        
-        def control(self, buttons, mousepos):
-            if self.mouse_over():
-                if buttons[stellar.keys.S_HELD][stellar.keys.M_1]:
-                    self.set_sprite("down")
-                else:
-                    self.set_sprite("hover")
-                if buttons[stellar.keys.S_RELEASED][stellar.keys.M_1]:
-                        self.clicked()
+    def logic(self):
+        pass
+    
+    def control(self, buttons, mousepos):
+        if self.mouse_over():
+            if buttons[stellar.keys.S_HELD][stellar.keys.M_1]:
+                self.set_sprite("down")
             else:
-                    self.set_sprite("default")
+                self.set_sprite("hover")
+            if buttons[stellar.keys.S_RELEASED][stellar.keys.M_1]:
+                    self.clicked()
+        else:
+            self.set_sprite("default")
 
 
 # Player class, basically a blue ball that moves around with the arrow keys
