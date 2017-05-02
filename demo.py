@@ -68,7 +68,13 @@ class Main(stellar.rooms.Room):
 	def __init__(self):
 		stellar.rooms.Room.__init__(self)
 
-		fix_help = stellar.sprites.Text("Press escape to return to the menu", stellar.tools.Font("arial.ttf", 20, (180, 180, 180), italic=True))
+
+		fnt_help = stellar.tools.Font("arial.ttf", 12, (180, 180, 180), italic=True, bold=True)
+
+		fix_help = stellar.sprites.Compound(
+			stellar.sprites.Text("Press escape to return to menu", fnt_help),
+			stellar.sprites.Text("Arrow keys to move", fnt_help, yoffset=16)
+		)
 
 		obj_player = Player()
 		obj_player.move_to(250, 250)
