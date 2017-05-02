@@ -18,7 +18,6 @@ class Grid:
 	def __init__(self):
 		self.nodes=[]
 
-<<<<<<< HEAD
 def returnDistanceBetweenPoints(x1, x2, y1, y2):
 	return math.sqrt((x1-x2)^2 + (y1-y2)^2)
 	
@@ -28,7 +27,6 @@ def autoBuildNeighborsLists(grid, min_dist=30):
 			if (potential != node and returnDistanceBetweenPoints(node.x,potential.x,node.y,potential.y) <= min_dist):
 				node.neighbors.append(potential)
 				node.moveCosts.append(1)
-=======
     
 def autoBuildNeighborsLists(grid, min_dist=30):
     for node in grid.nodes:
@@ -36,7 +34,6 @@ def autoBuildNeighborsLists(grid, min_dist=30):
             if (potential != node and tools.returnDistanceBetweenPoints(node.x,potential.x,node.y,potential.y) <= min_dist):
                 node.neighbors.append(potential)
                 node.moveCosts.append(1)
->>>>>>> origin/master
 
 def wipeNodes(grid):
 	for node in grind.nodes:
@@ -47,7 +44,6 @@ def wipeNodes(grid):
 		self.child= None
 		
 def pathfind(grid, startNode, endNode, nodeSize):
-<<<<<<< HEAD
 	openList = []
 	openListPriorities = []
 	closedList = []
@@ -92,7 +88,6 @@ def pathfind(grid, startNode, endNode, nodeSize):
 	wipeNodes(grid)
 	return curNode.child
 					
-=======
     openList = []
     openListPriorities = []
     closedList = []
@@ -136,5 +131,3 @@ def pathfind(grid, startNode, endNode, nodeSize):
     del closedList
     wipeNodes(grid)
     return curNode.child
-                    
->>>>>>> origin/master
