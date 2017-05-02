@@ -1,2 +1,2 @@
 from stellarEngine import engine
-__author__ = "Ramaraunt"
+__author__ = "LeapBeforeYouLook and Ramaraunt"
