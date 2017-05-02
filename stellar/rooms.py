@@ -60,6 +60,10 @@ class Room:
 	def draw_rect(self, color, dims):
 		self.game.pygame.draw.rect(self.game.screen, color, dims)
 
+
+	def draw_lines(self, color, lines, width):
+		self.game.pygame.draw.lines(self.game.screen, color, True, lines, width)
+		
 	def draw_ellipse(self, color, dims):
 		self.game.pygame.draw.ellipse(self.game.screen, color, dims)
 

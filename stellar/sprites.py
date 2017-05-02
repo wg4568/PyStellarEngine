@@ -17,11 +17,34 @@ class Box(Sprite):
 		self.height = height
 		self.color = color
 
+                
 		self.hitbox = hitboxes.Box(self.width, self.height)
 
 	def draw(self, room, posn, scale=1):
 		posn = (posn[0]+self.xoffset, posn[1]+self.yoffset)
 		room.draw_rect(self.color, list(posn) + [self.width*scale, self.height*scale])
+
+
+class BoxOutline(Sprite):
+	def __init__(self, color, width, height, xoffset=0, yoffset=0, linewidth=1):
+		Sprite.__init__(self, xoffset=xoffset, yoffset=yoffset)
+		self.width = width
+		self.height = height
+		self.color = color
+                self.lines = [(0,0),(width,0),(width,height),(0,height)]
+                self.linewidth = linewidth
+		self.hitbox = hitboxes.Box(self.width, self.height)
+
+	def draw(self, room, posn, scale=1):
+		posn = (posn[0]+self.xoffset, posn[1]+self.yoffset)
+		finallines = []
+		for point in range(4):
+                        curpoint = (self.lines[point][0] + posn[0]-self.xoffset,self.lines[point][1]+posn[1]-self.yoffset)
+                        finallines.append(curpoint)
+		room.draw_lines(self.color, finallines, self.linewidth)
+
+
+
 
 class Ellipse(Sprite):
 	def __init__(self, color, width, height, xoffset=0, yoffset=0):
