@@ -59,7 +59,24 @@ class Image(Sprite):
 		posn = (posn[0]+self.xoffset, posn[1]+self.yoffset)
 		size = map(lambda x: int(x*scale), self.size)
 		img = pygame.transform.scale(self.surf, size)
-		room.draw_image(img, posn)
+		room.draw_blit(img, posn)
+
+class Text(Sprite):
+	def __init__(self, text, font, xoffset=0, yoffset=0):
+		Sprite.__init__(self, xoffset=xoffset, yoffset=yoffset)
+		self.text = text
+		self.font = font
+		self.surf = self.font.get_surf(self.text)
+		self.size = self.font.size(self.text)
+
+		self.hitbox = hitboxes.Box(*self.size)
+
+	def draw(self, room, posn, scale=1):
+		posn = (posn[0]+self.xoffset, posn[1]+self.yoffset)
+		size = map(lambda x: int(x*scale), self.size)
+		txt = pygame.transform.scale(self.surf, size)
+		room.draw_blit(txt, posn)
+
 
 class Compound(Sprite):
 	def __init__(self, *sprites):

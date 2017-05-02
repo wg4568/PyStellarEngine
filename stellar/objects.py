@@ -27,6 +27,13 @@ class Object:
 	def get_position(self):
 		return (self.x, self.y)
 
+	def move_to(self, x, y):
+		self.x, self.y = x, y
+
+	def move_by(self, x, y):
+		self.x += x
+		self.y += y
+
 	def _logic(self):
 		try: self.logic()
 		except AttributeError: pass

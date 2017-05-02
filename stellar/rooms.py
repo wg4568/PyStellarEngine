@@ -3,14 +3,20 @@ class Room:
 		self.game = None
 		self.background = (0, 0, 0)
 		self.objects = []
+		self.fixtures = []
 		self.active = False
+		self.size = None
 
 	def game_link(self, game):
 		self.game = game
+		self.size = self.game.size
 
 	def add_object(self, obj):
 		obj.room_link(self)
 		self.objects.append(obj)
+
+	def add_fixture(self, fixture, posn):
+		self.fixtures.append([fixture, posn])
 
 	def activate(self):
 		self.active = True
@@ -39,6 +45,9 @@ class Room:
 	def _draw(self):
 		self.game.screen.fill(self.background)
 
+		for fixture, posn in self.fixtures:
+			fixture.draw(self, posn)
+
 		for obj in self.objects:
 			obj._draw()
 
@@ -51,6 +60,8 @@ class Room:
 	def draw_rect(self, color, dims):
 		self.game.pygame.draw.rect(self.game.screen, color, dims)
 
-	# room.draw_rect(self.color, list(posn) + [self.width*scale, self.height*scale])
-	# room.draw_ellipse(self.color, list(posn) + [self.width*scale, self.height*scale])
-	# room.draw_image(img, posn)
+	def draw_ellipse(self, color, dims):
+		self.game.pygame.draw.ellipse(self.game.screen, color, dims)
+
+	def draw_blit(self, surf, posn):
+		self.game.screen.blit(surf, posn)
