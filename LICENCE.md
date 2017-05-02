@@ -1,3 +1,4 @@
+# Licence
 MIT License
 
 Copyright (c) 2017 William Gardner
