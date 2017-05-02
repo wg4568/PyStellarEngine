@@ -39,23 +39,23 @@ class Base:
 		self.running = True
 
 		while self.running:
-                        self.events = pygame.event.get()
-                        
-                        for event in self.events:
-                                self.get_current_room()._handle_event(event)
-                                if event.type == pygame.QUIT:
-                                        self.stop()
-                                if event.type == pygame.MOUSEMOTION:
-                                        self.mousepos = pygame.mouse.get_pos()
+			self.events = pygame.event.get()
+			
+			for event in self.events:
+				self.get_current_room()._handle_event(event)
+				if event.type == pygame.QUIT:
+					self.stop()
+				if event.type == pygame.MOUSEMOTION:
+					self.mousepos = pygame.mouse.get_pos()
 
-                        self.buttons = keys.control_check(self.buttons[0], self.buttons[1], self.buttons[2], self.events)
-
-
-                        self.get_current_room()._control(self.buttons, self.mousepos)
-                        self.get_current_room()._logic()
-                        self.get_current_room()._draw()
+			self.buttons = keys.control_check(self.buttons[0], self.buttons[1], self.buttons[2], self.events)
 
 
+			self.get_current_room()._control(self.buttons, self.mousepos)
+			self.get_current_room()._logic()
+			self.get_current_room()._draw()
 
-                        pygame.display.update()
-                        self.clock.tick(self.target_framerate)
+
+
+			pygame.display.update()
+			self.clock.tick(self.target_framerate)

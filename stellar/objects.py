@@ -35,15 +35,18 @@ class Object:
 		self.y += y
 
 	def _logic(self):
-		try: self.logic()
-		except AttributeError: pass
+		func = getattr(self, "logic", None)
+		if callable(func):
+			self.logic()
 
 	def _control(self, buttons, mouse):
-		try: self.control(buttons, mouse)
-		except AttributeError: pass
+		func = getattr(self, "control", None)
+		if callable(func):
+			self.control(buttons, mouse)
 
 	def _draw(self):
 		self.get_current_sprite().draw(self.room, self.get_position(), self.scale)
 
-		try: self.draw()
-		except AttributeError: pass
+		func = getattr(self, "draw", None)
+		if callable(func):
+			self.draw()
