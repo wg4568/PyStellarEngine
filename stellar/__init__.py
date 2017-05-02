@@ -1,2 +1,3 @@
-from stellarEngine import engine
-__author__ = "LeapBeforeYouLook and Ramaraunt"
+import base, hitboxes, keys, sprites
+
+__authors__ = ["LeapBeforeYouLook", "Ramaraunt"]
