@@ -39,7 +39,7 @@ class BoxOutline(Sprite):
 		posn = (posn[0]+self.xoffset, posn[1]+self.yoffset)
 		finallines = []
 		for point in range(4):
-                        curpoint = (self.lines[point][0] + posn[0]-self.xoffset,self.lines[point][1]+posn[1]-self.yoffset)
+                        curpoint = (self.lines[point][0] + posn[0],self.lines[point][1]+posn[1])
                         finallines.append(curpoint)
 		room.draw_lines(self.color, finallines, self.linewidth)
 
