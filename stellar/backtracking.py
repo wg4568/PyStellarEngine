@@ -17,6 +17,9 @@ class Node:
     def addHole(self,direction):
         self.holes[direction] = True
 
+    def addNeighor(self,direction,neighbor):
+        self.neighbors[direction]=neighbor
+
 class Grid:
     def __init__(self, width=30, height=30):
         self.nodes = [[Node()] * width] * height]
@@ -24,9 +27,16 @@ class Grid:
             for m in range(0,height-1):
                 self.nodes[n,m].row = n
                 self.nodes[n,m].column = m
-
-
-
+        for n in range(0,width-1):
+            for m in range(0,height-1):
+                if n > 0:
+                    self.nodes[n,m].addNeighbor(1,self.nodes[n-1,m])
+                if m > 0:
+                    self.nodes[n,m].addNeighbor(0,self.nodes[n,m-1])
+                if n < width - 1:
+                    self.nodes[n,m].addNeighbor(3,self.nodes[n+1,m])
+                if m < height - 1:
+                    self.nodes[n,m].addNeighbor(2,self.nodes[n,m+1])
         
 def buildMaze(grid):
     seed()
