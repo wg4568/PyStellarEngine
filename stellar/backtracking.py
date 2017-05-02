@@ -43,10 +43,25 @@ class Grid:
                 if m < height - 1:
                     self.nodes[n][m].addNeighbor(2,self.nodes[n][m+1])
 
-      
+def randomHoles(grid,holeCount=30,seed=-1):
+    if seed == -1:
+        random.seed()
+    else:
+        random.seed(seed)
+    for hole in range(holeCount - 1):
+        curTile = grid.nodes[random.range(0,grid.width-1)][random.range(0,grid.height-1)]
+        hole = rand.range(4-1)
+
+        while len(curTile.neighbors) < hole:
+            hole = rand.range(4-1)
+
+        curTile.makeHole(hole)
         
-def buildMaze(grid):
-    seed()
+def buildMaze(grid,seed=-1):
+    if seed == -1:
+        random.seed()
+    else:
+        random.seed(seed)
     side = random.range(1)
     cap = random.range(1)
     if cap == 1:
