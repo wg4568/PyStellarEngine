@@ -1,13 +1,15 @@
 import pygame
 
 def pushed_check(pushed, events):
-	for index in range(0, len(pushed)-1):
-		pushed[index]=False
+	for index in range(0, len(pushed) - 1):
+		pushed[index] = False
+
 	for event in events:
 		if event.type == pygame.KEYDOWN:
 			pushed[event.key] = True
 
 	mouse = [False] * 3
+
 	for event in events:
 		if event.type == pygame.MOUSEBUTTONDOWN:
 			if event.button == 1:
@@ -17,18 +19,22 @@ def pushed_check(pushed, events):
 			if event.button == 2:
 				mouse[2] = True
 			
-	pushed[M_1]=mouse[0]
-	pushed[M_2]=mouse[1]
-	pushed[M_3]=mouse[2]
+	pushed[M_1] = mouse[0]
+	pushed[M_2] = mouse[1]
+	pushed[M_3] = mouse[2]
+
 	return pushed
 
 def released_check(released, events):
-	for index in range(0,len(released)-1):
-		released[index]=False
+	for index in range(0, len(released) - 1):
+		released[index] = False
+
 	for event in events:
 		if event.type == pygame.KEYUP:
 			released[event.key] = True
+
 	mouse = [False] * 3
+
 	for event in events:
 		if event.type == pygame.MOUSEBUTTONUP:
 			if event.button == 1:
@@ -41,16 +47,18 @@ def released_check(released, events):
 	released[M_1] = mouse[0]
 	released[M_2] = mouse[1]
 	released[M_3] = mouse[2]  
+
 	return released
 
 def held_check(held, released, pushed):
-	for index in range(0,len(held)-1):
+	for index in range(0, len(held) - 1):
 		if not held[index]:
 			if pushed[index]:
 				held[index] = True
 		else:
 			if released[index]:
 				held[index] = False
+
 	return held
 			
 			

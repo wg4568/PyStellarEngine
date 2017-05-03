@@ -12,8 +12,8 @@ class Button(stellar.objects.Object):
 		self.clicked = None
 
 	def logic(self):
-		print "coding"
-	
+		pass	
+
 	def control(self, buttons, mousepos):
 		if self.mouse_over():
 			if buttons[stellar.keys.S_HELD][stellar.keys.M_1]:
@@ -68,7 +68,6 @@ class Menu(stellar.rooms.Room):
 			stellar.sprites.Box((180, 0, 0), 180, 50),
 			stellar.sprites.Text("Start", stellar.tools.Font("arial.ttf", 30, (255, 255, 255)), xoffset=5, yoffset=5)
 		)
-
 		spr_start_down = stellar.sprites.Compound(
 			stellar.sprites.Box((250, 0, 0), 180, 50),
 			stellar.sprites.Text("Start", stellar.tools.Font("arial.ttf", 30, (255, 255, 255)), xoffset=5, yoffset=5)
