@@ -50,11 +50,13 @@ class Base:
 
 			self.buttons = keys.control_check(self.buttons[0], self.buttons[1], self.buttons[2], self.events)
 
+			self.get_current_room().run(self.buttons, self.mousepos, True)
 
-			self.get_current_room()._control(self.buttons, self.mousepos)
-			self.get_current_room()._logic()
-			self.get_current_room()._draw()
+			for room in self.rooms:
+                                if room.persistent and room.runsInBackground:
+                                        room.run(self.buttons, self.mousepos, False)
+
+
 
 			pygame.display.update()
 			self.clock.tick(self.target_framerate)
-			self.frame += 1
