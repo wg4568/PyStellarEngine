@@ -43,18 +43,25 @@ class Object:
 		self.y += y
 
 	def _logic(self):
-		func = getattr(self, "logic", None)
-		if callable(func):
-			self.logic()
+		self.logic()
 
 	def _control(self, buttons, mouse):
-		func = getattr(self, "control", None)
-		if callable(func):
-			self.control(buttons, mouse)
+		self.control(buttons, mouse)
 
 	def _draw(self):
 		self.get_current_sprite().draw(self.room, self.get_position(), self.scale)
 
-		func = getattr(self, "draw", None)
-		if callable(func):
-			self.draw()
+		self.draw()
+
+
+
+
+
+	def logic(self):
+		pass
+
+	def control(self, buttons, mouse):
+		pass
+
+	def draw(self):
+		pass

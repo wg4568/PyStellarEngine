@@ -21,9 +21,11 @@ class Room:
 
 	def activate(self):
 		self.active = True
+		self.on_load()
 
 	def deactivate(self):
 		self.active = False
+		self.on_unload()
 
 	def _handle_event(self, event):
 		try: self.handle_event(event)
@@ -35,15 +37,13 @@ class Room:
 		for obj in self.objects:
 			obj._logic()
 
-		try: self.logic()
-		except AttributeError: pass
+		self.logic()
 
 	def _control(self, buttons, mouse):
 		for obj in self.objects:
 			obj._control(buttons, mouse)
 
-		try: self.control(buttons, mouse)
-		except AttributeError: pass
+		self.control(buttons, mouse)
 
 	def _draw(self):
 		self.game.screen.fill(self.background)
@@ -54,8 +54,7 @@ class Room:
 		for obj in self.objects:
 			obj._draw()
 
-		try: self.draw()
-		except AttributeError: pass
+		self.draw()
 
 	def mouse_pos(self):
 		return self.game.mousepos
@@ -72,3 +71,22 @@ class Room:
 
 	def draw_blit(self, surf, posn):
 		self.game.screen.blit(surf, posn)
+
+
+
+
+
+	def logic(self):
+		pass
+
+	def control(self, buttons, mouse):
+		pass
+
+	def draw(self):
+		pass
+
+	def on_load(self):
+		pass
+
+	def on_unload(self):
+		pass

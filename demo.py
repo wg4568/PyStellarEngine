@@ -55,7 +55,7 @@ class Menu(stellar.rooms.Room):
 		# I added them to speed up the game when you have lots of objects that just sit around looking pretty
 		#   and not actually doing anything
 		fix_title = stellar.sprites.Text("Cool Game", stellar.tools.Font("arial.ttf", 40, (255, 255, 255)))
-		fix_author = stellar.sprites.Text("A demo by Leap", stellar.tools.Font("arial.ttf", 20, (180, 180, 180), italic=True))
+		fix_author = stellar.sprites.Text("A PyStellar Demo", stellar.tools.Font("arial.ttf", 20, (180, 180, 180), italic=True))
 
 		# Define the two sprites for the button object in a minute
 		# 'Compound' sprites are simply sprites made up of multiple other sprites, in this case,
@@ -104,17 +104,20 @@ class Main(stellar.rooms.Room):
 		)
 
 		# Create player instance, from class defined above
-		obj_player = Player()
-		obj_player.move_to(250, 250)
+		self.obj_player = Player()
+		self.obj_player.move_to(250, 250)
 
 		# Add the things
 		self.add_fixture(fix_help, (10, 10))
 
-		self.add_object(obj_player)
+		self.add_object(self.obj_player)
 
 	def control(self, buttons, mousepos):	   # Will return to menu if escape is pressed
 		if buttons[stellar.keys.S_PUSHED][stellar.keys.K_ESCAPE]:
 			self.game.set_room("menu")
+
+	def on_load(self):
+		self.obj_player.move_to(250, 250)
 
 
 # Create new game, set title
