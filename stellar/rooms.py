@@ -2,6 +2,7 @@ class Room:
 	def __init__(self):
 		self.game = None
 		self.background = (0, 0, 0)
+		self.all_objects = []
 		self.objects = []
 		self.fixtures = []
 		self.active = False
@@ -13,7 +14,7 @@ class Room:
 
 	def add_object(self, obj):
 		obj.room_link(self)
-		self.objects.append(obj)
+		self.all_objects.append(obj)
 
 	def add_fixture(self, fixture, posn):
 		self.fixtures.append([fixture, posn])
@@ -29,6 +30,8 @@ class Room:
 		except AttributeError: pass
 
 	def _logic(self):
+		self.objects = filter(lambda x: x.enabled, self.all_objects)
+
 		for obj in self.objects:
 			obj._logic()
 

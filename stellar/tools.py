@@ -36,3 +36,9 @@ class Cooldown:
 
 def returnDistanceBetweenPoints(x1, x2, y1, y2):
     return math.sqrt((x1-x2)^2 + (y1-y2)^2)
+
+def random_rgb():
+	r = random.randint(0, 255)
+	g = random.randint(0, 255)
+	b = random.randint(0, 255)
+	return r, g, b

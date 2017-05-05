@@ -5,8 +5,16 @@ class Object:
 		self.scale = scale
 		self.room = None
 
+		self.enabled = True
+
 		self.current_sprite = None
 		self.sprites = {}
+
+	def disable(self):
+		self.enabled = False
+
+	def enable(self):
+		self.enable = True
 
 	def room_link(self, room):
 		self.room = room
