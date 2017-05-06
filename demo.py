@@ -1,30 +1,6 @@
 import stellar
 
-# Button class, takes two sprites as arguments: default and hover
-# Will call self.clicked when clicked on, regardless if set
-class Button(stellar.objects.Object):
-	def __init__(self, default, hover, down):
-		stellar.objects.Object.__init__(self)
-		self.add_sprite("default", default)
-		self.add_sprite("hover", hover)
-		self.add_sprite("down", down)
-		self.set_sprite("default")
-		self.clicked = None
-
-	def logic(self):
-		pass	
-
-	def control(self, buttons, mousepos):
-		if self.mouse_over():
-			if buttons[stellar.keys.S_HELD][stellar.keys.M_1]:
-				self.set_sprite("down")
-			else:
-				self.set_sprite("hover")
-			if buttons[stellar.keys.S_RELEASED][stellar.keys.M_1]:
-					self.clicked()
-		else:
-			self.set_sprite("default")
-
+SND_CLICK = stellar.sound.Sound("click.wav")
 
 # Player class, basically a blue ball that moves around with the arrow keys
 class Player(stellar.objects.Object):
@@ -45,6 +21,8 @@ class Player(stellar.objects.Object):
 		if buttons[stellar.keys.S_HELD][stellar.keys.K_RIGHT]:
 			self.move_by(self.movespeed, 0)
 
+	def on_click(self):
+		SND_CLICK.play()
 
 # Menu room, has some text, and a Button which calls self.begin_game
 class Menu(stellar.rooms.Room):
@@ -74,9 +52,10 @@ class Menu(stellar.rooms.Room):
 		)
 
 		# Create button object, add the previous sprites
-		obj_start = Button(spr_start_default, spr_start_hover, spr_start_down)
+		obj_start = stellar.objects.Button(spr_start_default, spr_start_hover, spr_start_down)
 		obj_start.move_to(20, 100)
-		obj_start.clicked = self.begin_game
+		obj_start.on_click = SND_CLICK.play
+		obj_start.when_clicked(self.begin_game)
 		self.add_object(obj_start)
 		
 		# Add fixtures and objects to the room
@@ -86,7 +65,7 @@ class Menu(stellar.rooms.Room):
 
 
 	def begin_game(self):					   # Called by the obj_start Button when it's clicked
-		self.game.set_room("main")			  # Switch to 'main' room, essentially starting the game
+		self.game.set_room("main")			   # Switch to 'main' room, essentially starting the game
 
 
 # The room in which the 'gameplay' takes place, has some help text
@@ -122,7 +101,7 @@ class Main(stellar.rooms.Room):
 
 # Create new game, set title
 game = stellar.base.Base()
-game.title = "Stellar Testing"
+game.title = "PyStellar Demo"
 
 # Add rooms, set to menu room
 game.add_room("menu", Menu())
