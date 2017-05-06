@@ -1,4 +1,5 @@
-import pygame, hitboxes
+import pygame
+import hitboxes
 
 class Sprite:
 	def __init__(self, xoffset=0, yoffset=0):
@@ -38,8 +39,8 @@ class BoxOutline(Sprite):
 		posn = (posn[0]+self.xoffset, posn[1]+self.yoffset)
 		finallines = []
 		for point in range(4):
-						curpoint = (self.lines[point][0] + posn[0],self.lines[point][1]+posn[1])
-						finallines.append(curpoint)
+			curpoint = (self.lines[point][0] + posn[0],self.lines[point][1]+posn[1])
+			finallines.append(curpoint)
 		room.draw_lines(self.color, finallines, self.linewidth)
 
 class Ellipse(Sprite):
@@ -58,8 +59,13 @@ class Ellipse(Sprite):
 class Image(Sprite):
 	def __init__(self, path, dimensions=None, xoffset=0, yoffset=0):
 		Sprite.__init__(self, xoffset=xoffset, yoffset=yoffset)
-		self.path = path
-		self.surf = pygame.image.load(self.path)
+
+		if isinstance(path, pygame.Surface):
+			self.path = None
+			self.surf = path
+		else:
+			self.path = path
+			self.surf = pygame.image.load(self.path)
 
 		if dimensions:
 			self.surf = pygame.transform.scale(self.surf, dimensions)
@@ -76,9 +82,10 @@ class Image(Sprite):
 
 	def draw(self, room, posn, scale=1):
 		posn = (posn[0]+self.xoffset, posn[1]+self.yoffset)
-		size = map(lambda x: int(x*scale), self.size)
-		img = pygame.transform.scale(self.surf, size)
-		room.draw_blit(img, posn)
+		if scale != 1:
+			size = map(lambda x: int(x*scale), self.size)
+			img = pygame.transform.scale(self.surf, size)
+		room.draw_blit(self.surf, posn)
 
 class Text(Sprite):
 	def __init__(self, text, font, xoffset=0, yoffset=0):
@@ -110,3 +117,13 @@ class Compound(Sprite):
 	def draw(self, room, posn, scale=1):
 		for sprite in self.sprites:
 			sprite.draw(room, posn)
+
+def LoadSheet(image, *sections):
+	sprites = []
+	sheet = pygame.image.load(image)
+	for section in sections:
+		cropped = pygame.Surface(section[:2])
+		cropped.blit(sheet, (0, 0), section)
+		img = Image(cropped)
+		sprites.append(img)
+	return sprites

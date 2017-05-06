@@ -2,21 +2,21 @@ import pygame
 import tools
 
 class Node:
-	def __init__(self):
-		self.neighbors=[]
-		self.moveCosts=[]
+	def __init__(self, x, y):
+		self.neighbors = []
+		self.moveCosts = []
 		self.blocked = False
-		self.x = 0
-		self.y = 0
-		self.fScore= 0
-		self.gScore= 0
-		self.moveScore= 0
-		self.parent= None
-		self.child= None
+		self.x = x
+		self.y = y
+		self.fScore = 0
+		self.gScore = 0
+		self.moveScore = 0
+		self.parent = None
+		self.child = None
 
 class Grid:
 	def __init__(self):
-		self.nodes=[]
+		self.nodes = []
 
 def returnDistanceBetweenPoints(x1, x2, y1, y2):
 	return math.sqrt((x1-x2)^2 + (y1-y2)^2)

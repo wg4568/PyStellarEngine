@@ -1,4 +1,6 @@
-import pygame, keys, tools
+import pygame
+import keys
+import tools
 
 class Base:
 	def __init__(self):
@@ -31,6 +33,7 @@ class Base:
 
 	def stop(self):
 		self.running = False
+		quit()
 
 	def start(self):
 		self.screen = pygame.display.set_mode(self.size)
@@ -50,6 +53,7 @@ class Base:
 
 			self.buttons = keys.control_check(self.buttons[0], self.buttons[1], self.buttons[2], self.events)
 
+			self.logic()
 
 			self.get_current_room()._control(self.buttons, self.mousepos)
 			self.get_current_room()._logic()
@@ -58,3 +62,6 @@ class Base:
 			pygame.display.update()
 			self.clock.tick(self.target_framerate)
 			self.frame += 1
+
+	def logic(self):
+		pass

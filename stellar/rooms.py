@@ -28,11 +28,11 @@ class Room:
 		self.on_unload()
 
 	def _handle_event(self, event):
-		try: self.handle_event(event)
-		except AttributeError: pass
+		self.handle_event(event)
 
 	def _logic(self):
 		self.objects = filter(lambda x: x.enabled, self.all_objects)
+		# self.objects = sorted(self.objects, key=lambda x: x.layer)
 
 		for obj in self.objects:
 			obj._logic()
@@ -83,6 +83,9 @@ class Room:
 		pass
 
 	def draw(self):
+		pass
+
+	def handle_event(self, event):
 		pass
 
 	def on_load(self):

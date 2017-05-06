@@ -7,6 +7,8 @@ class Object:
 		self.scale = scale
 		self.room = None
 
+		self.layer = 0
+
 		self.enabled = True
 
 		self.current_sprite = None
@@ -71,28 +73,38 @@ class Object:
 		pass
 
 class Button(Object):
-	def __init__(self, default, hover, down):
+	def __init__(self, default, hover, down, hover_sound=None, click_sound=None):
 		Object.__init__(self)
 		self.add_sprite("default", default)
 		self.add_sprite("hover", hover)
 		self.add_sprite("down", down)
 		self.set_sprite("default")
+
+		self.click_sound = click_sound
+		self.hover_sound = hover_sound
+
 		self.clicked = None
 		self.click_inp = keys.M_1
+
+		self.new_mouseover = False
 
 	def when_clicked(self, func):
 		self.clicked = func
 
-	def logic(self):
-		pass
-
 	def control(self, buttons, mousepos):
 		if self.mouse_over():
+			if not self.new_mouseover:
+				if self.hover_sound:
+					self.hover_sound.play()
+				self.new_mouseover = True
 			if buttons[keys.S_HELD][self.click_inp]:
 				self.set_sprite("down")
 			else:
 				self.set_sprite("hover")
 			if buttons[keys.S_RELEASED][self.click_inp]:
-					self.clicked()
+				if self.click_sound:
+					self.click_sound.play()
+				self.clicked()
 		else:
+			self.new_mouseover = False
 			self.set_sprite("default")

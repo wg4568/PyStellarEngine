@@ -1,10 +1,25 @@
 import pyaudio
 import wave
+import pygame
 import threading
-import copy
+import time
 
+# Base 'Sound' class that all inherit from
 class Sound:
+	def __init__(self):
+		self.path = None
+		self.volume = 1
+
+	def set_volume(self, val):
+		self.volume = val
+
+	def play(self):
+		pass
+
+# For sound effects, only supports WAV. Use this when you don't want any delay when playing the sound
+class Effect(Sound):
 	def __init__(self, path, chunk=1024):
+		Sound.__init__(self)
 		self.path = path
 		self.chunk = chunk
 
@@ -31,6 +46,22 @@ class Sound:
 		thread = threading.Thread(target=self._play)
 		thread.start()
 
+# For music, can only play one at a time, MP3 supported. Will have some slight lag starting up, so not for sound effects
+class Music(Sound):
+	def __init__(self, path):
+		Sound.__init__(self)
+		self.path = path
 
-# wx = Sound("../click.wav")
-# wx.play()
+	def set_volume(self, val):
+		self.volume = val
+		pygame.mixer.music.set_volume(self.volume)
+
+	def _play(self):
+		pygame.mixer.init()
+		pygame.mixer.music.load(self.path)
+		pygame.mixer.music.play()
+
+
+	def play(self):
+		thread = threading.Thread(target=self._play)
+		thread.start()
